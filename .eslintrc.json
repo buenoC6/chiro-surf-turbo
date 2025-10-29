@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": [
+    ",**/*.graphql",
+    "src/graphql/**/*"
+  ],
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "rules": {
+        "prettier/prettier": "off"
+      }
+    }
+  ]
+}
