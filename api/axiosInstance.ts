@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useLanguageStore } from '@/store/languageStore';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL || 'https://api.findyvet.be';
 
 export const axiosInstance = axios.create({
     baseURL: baseURL,
