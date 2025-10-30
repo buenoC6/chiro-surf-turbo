@@ -5,7 +5,7 @@ import { ChevronDown, FileAudio, Sun, Moon, FolderOpen, Save, Settings } from 'l
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Button } from './ui/button';
-import MediaModule from './MediaModule';
+import MediaModule, { mockSources } from './MediaModule';
 import DerushModule from './DerushModule';
 import AnalysisModule from './AnalysisModule';
 import InterpretationModule from './InterpretationModule';
@@ -25,15 +25,65 @@ interface SelectedAudioFile {
   importName: string;
 }
 
+// Function to find audio file by ID in mock sources
+const findAudioFileById = (fileId: string): SelectedAudioFile | null => {
+  for (const source of mockSources) {
+    for (const importBatch of source.imports) {
+      const file = importBatch.files.find(f => f.id === fileId);
+      if (file) {
+        return {
+          id: file.id,
+          name: file.name,
+          duration: file.duration,
+          sampleRate: file.sampleRate,
+          sourceName: source.name,
+          importName: importBatch.name,
+        };
+      }
+    }
+  }
+  return null;
+};
+
 export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedAudioFile, setSelectedAudioFile] = useState<SelectedAudioFile | null>(null);
   const { theme, toggleTheme } = useTheme();
 
-  // Extraire le module de l'URL
-  const urlModule = location.pathname.split('/').pop() || 'media';
+  // Parse URL to extract module and mediaId
+  // Expected structure: /project/:projectName/:module or /project/:projectName/:module/:mediaId
+  const pathParts = location.pathname.split('/').filter(Boolean);
+  let urlModule = 'media';
+  let urlMediaId: string | null = null;
+  
+  if (pathParts.length >= 3) {
+    urlModule = pathParts[2]; // /project/:projectName/:module
+    if (pathParts.length >= 4) {
+      urlMediaId = pathParts[3]; // /project/:projectName/:module/:mediaId
+    }
+  }
+  
   const [activeTab, setActiveTab] = useState(urlModule);
+  
+  // Load audio file from URL when mediaId is present
+  useEffect(() => {
+    if (urlMediaId) {
+      const file = findAudioFileById(urlMediaId);
+      if (file) {
+        // Only update if the file is different from current selection
+        setSelectedAudioFile(prevFile => {
+          if (!prevFile || prevFile.id !== file.id) {
+            return file;
+          }
+          return prevFile;
+        });
+      }
+    } else {
+      // Clear selection if no mediaId in URL
+      setSelectedAudioFile(null);
+    }
+  }, [urlMediaId]);
   
   // Synchroniser l'onglet actif avec l'URL
   useEffect(() => {
@@ -45,8 +95,17 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
   // Fonction pour changer de module
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    navigate(`/project/${encodeURIComponent(projectName)}/${value}`);
+    // Always preserve the media ID in URL if a file is selected
+    if (selectedAudioFile) {
+      navigate(`/project/${encodeURIComponent(projectName)}/${value}/${selectedAudioFile.id}`);
+    } else {
+      navigate(`/project/${encodeURIComponent(projectName)}/${value}`);
+    }
   };
+
+  // Déterminer si on doit afficher les modules secondaires
+  // Ils sont visibles si un fichier est sélectionné OU si on est sur un module non-media
+  const shouldShowSecondaryTabs = selectedAudioFile || (urlModule !== 'media');
 
   return (
     <div className="h-screen bg-[var(--app-bg)] text-foreground flex flex-col">
@@ -111,14 +170,16 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
               Media
             </TabsTrigger>
             
-            {/* Secondary Tabs - Only visible when a file is selected */}
-            {selectedAudioFile && (
+            {/* Secondary Tabs - Visible when a file is selected or when on a secondary module */}
+            {shouldShowSecondaryTabs && (
               <>
                 <div className="h-6 w-px bg-gray-700 mx-2" />
-                <div className="flex items-center gap-1 text-xs text-gray-400 mr-2">
-                  <FileAudio className="w-3 h-3" />
-                  <span className="max-w-[200px] truncate">{selectedAudioFile.name}</span>
-                </div>
+                {selectedAudioFile && (
+                  <div className="flex items-center gap-1 text-xs text-gray-400 mr-2">
+                    <FileAudio className="w-3 h-3" />
+                    <span className="max-w-[200px] truncate">{selectedAudioFile.name}</span>
+                  </div>
+                )}
                 <TabsTrigger 
                   value="derush" 
                   className="data-[state=active]:bg-[#0D1117] data-[state=active]:text-[#00C2FF] px-4"
@@ -152,35 +213,61 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
           <TabsContent value="media" className="h-full m-0">
             <MediaModule 
               onFileSelect={(file) => {
-                setSelectedAudioFile(file);
-                handleTabChange('derush');
+                // Navigate directly with the file data
+                // The useEffect will handle loading the file from URL
+                navigate(`/project/${encodeURIComponent(projectName)}/derush/${file.id}`);
               }}
             />
           </TabsContent>
-          {selectedAudioFile && (
-            <>
-              <TabsContent value="derush" className="h-full m-0">
-                <DerushModule 
-                  audioFile={selectedAudioFile}
-                  onClose={() => {
-                    setSelectedAudioFile(null);
-                    handleTabChange('media');
-                  }}
-                />
-              </TabsContent>
-              <TabsContent value="analyse" className="h-full m-0">
-                <AnalysisModule audioFile={selectedAudioFile} />
-              </TabsContent>
-              <TabsContent value="interpretation" className="h-full m-0">
-                <InterpretationModule audioFile={selectedAudioFile} />
-              </TabsContent>
-              <TabsContent value="export" className="h-full m-0">
-                <div className="h-full flex items-center justify-center">
-                  <p className="text-gray-500">Module Export (à implémenter)</p>
-                </div>
-              </TabsContent>
-            </>
-          )}
+          
+          {/* Always render secondary modules if a file is selected */}
+          <TabsContent value="derush" className="h-full m-0">
+            {selectedAudioFile ? (
+              <DerushModule 
+                audioFile={selectedAudioFile}
+                onClose={() => {
+                  setSelectedAudioFile(null);
+                  handleTabChange('media');
+                }}
+              />
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-gray-500">Sélectionnez un fichier audio pour accéder à ce module</p>
+              </div>
+            )}
+          </TabsContent>
+          
+          <TabsContent value="analyse" className="h-full m-0">
+            {selectedAudioFile ? (
+              <AnalysisModule audioFile={selectedAudioFile} />
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-gray-500">Sélectionnez un fichier audio pour accéder à ce module</p>
+              </div>
+            )}
+          </TabsContent>
+          
+          <TabsContent value="interpretation" className="h-full m-0">
+            {selectedAudioFile ? (
+              <InterpretationModule audioFile={selectedAudioFile} />
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-gray-500">Sélectionnez un fichier audio pour accéder à ce module</p>
+              </div>
+            )}
+          </TabsContent>
+          
+          <TabsContent value="export" className="h-full m-0">
+            {selectedAudioFile ? (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-gray-500">Module Export (à implémenter)</p>
+              </div>
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <p className="text-gray-500">Sélectionnez un fichier audio pour accéder à ce module</p>
+              </div>
+            )}
+          </TabsContent>
         </div>
       </Tabs>
 

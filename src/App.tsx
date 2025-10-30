@@ -4,7 +4,7 @@ import MainLayout from './components/MainLayout';
 import { ThemeProvider } from './components/ThemeProvider';
 
 function ProjectLayout() {
-  const { projectName } = useParams<{ projectName: string }>();
+  const { projectName, mediaId, module } = useParams<{ projectName: string; mediaId?: string; module?: string }>();
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -29,7 +29,13 @@ export default function App() {
             element={<ProjectLauncher onProjectSelect={() => {}} />}
           />
           
-          {/* Routes vers les différents modules du projet */}
+          {/* Routes vers les différents modules du projet avec média */}
+          <Route 
+            path="/project/:projectName/:module/:mediaId" 
+            element={<ProjectLayout />}
+          />
+          
+          {/* Routes vers les différents modules du projet sans média */}
           <Route 
             path="/project/:projectName/:module" 
             element={<ProjectLayout />}

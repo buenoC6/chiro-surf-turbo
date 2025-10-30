@@ -13,9 +13,9 @@ interface Project {
 }
 
 const recentProjects: Project[] = [
-  { id: '1', name: 'Étude Parc Naturel 2024', path: '/projects/parc-naturel-2024', lastOpened: '2025-10-28' },
-  { id: '2', name: 'Inventaire Chiroptères Loire', path: '/projects/loire-inventory', lastOpened: '2025-10-25' },
-  { id: '3', name: 'Suivi Migration Automne', path: '/projects/migration-automne', lastOpened: '2025-10-20' },
+  { id: '1', name: 'Étude_Parc_Naturel_2024', path: '/projects/parc-naturel-2024', lastOpened: '2025-10-28' },
+  { id: '2', name: 'Inventaire_Chiroptères_Loire', path: '/projects/loire-inventory', lastOpened: '2025-10-25' },
+  { id: '3', name: 'Suivi_Migration_Automne', path: '/projects/migration-automne', lastOpened: '2025-10-20' },
 ];
 
 interface ProjectLauncherProps {

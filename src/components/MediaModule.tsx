@@ -144,6 +144,9 @@ const mockSources: Source[] = [
   }
 ];
 
+// Export mock sources for use in other components
+export { mockSources };
+
 interface MediaModuleProps {
   onFileSelect?: (file: {
     id: string;
