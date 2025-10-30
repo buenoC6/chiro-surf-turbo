@@ -1,21 +1,47 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useParams } from 'react-router-dom';
 import ProjectLauncher from './components/ProjectLauncher';
 import MainLayout from './components/MainLayout';
 import { ThemeProvider } from './components/ThemeProvider';
 
-export default function App() {
-  const [currentProject, setCurrentProject] = useState<string | null>(null);
+function ProjectLayout() {
+  const { projectName } = useParams<{ projectName: string }>();
+  const navigate = useNavigate();
 
+  const handleClose = () => {
+    navigate('/');
+  };
+
+  if (!projectName) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <MainLayout projectName={decodeURIComponent(projectName)} onClose={handleClose} />;
+}
+
+export default function App() {
   return (
     <ThemeProvider>
-      {!currentProject ? (
-        <ProjectLauncher onProjectSelect={setCurrentProject} />
-      ) : (
-        <MainLayout 
-          projectName={currentProject} 
-          onClose={() => setCurrentProject(null)} 
-        />
-      )}
+      <Router>
+        <Routes>
+          {/* Route vers le launcher de projet */}
+          <Route 
+            path="/" 
+            element={<ProjectLauncher onProjectSelect={() => {}} />}
+          />
+          
+          {/* Routes vers les différents modules du projet */}
+          <Route 
+            path="/project/:projectName/:module" 
+            element={<ProjectLayout />}
+          />
+          
+          {/* Redirection vers media par défaut pour un projet */}
+          <Route 
+            path="/project/:projectName" 
+            element={<Navigate to="media" replace />} 
+          />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

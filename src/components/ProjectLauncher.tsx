@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Folder, Plus, Clock, Search, Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -22,14 +23,19 @@ interface ProjectLauncherProps {
 }
 
 export default function ProjectLauncher({ onProjectSelect }: ProjectLauncherProps) {
+  const navigate = useNavigate();
   const [showNewProject, setShowNewProject] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const { theme, toggleTheme } = useTheme();
 
+  const handleProjectSelection = (projectName: string) => {
+    navigate(`/project/${encodeURIComponent(projectName)}/media`);
+  };
+
   const handleCreateProject = () => {
     if (newProjectName.trim()) {
-      onProjectSelect(newProjectName);
+      handleProjectSelection(newProjectName);
     }
   };
 
@@ -89,7 +95,7 @@ export default function ProjectLauncher({ onProjectSelect }: ProjectLauncherProp
                 {filteredProjects.map((project) => (
                   <button
                     key={project.id}
-                    onClick={() => onProjectSelect(project.name)}
+                    onClick={() => handleProjectSelection(project.name)}
                     className="bg-[var(--app-panel)] border border-[var(--app-border)] rounded-lg p-4 text-left hover:border-[var(--ring)] transition-all group"
                   >
                     <div className="flex items-start gap-3">

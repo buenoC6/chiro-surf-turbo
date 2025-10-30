@@ -1,7 +1,6 @@
-'use client';
-
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown, FileAudio, Sun, Moon, FolderOpen, Save, Settings } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
@@ -27,9 +26,27 @@ interface SelectedAudioFile {
 }
 
 export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
-  const [activeTab, setActiveTab] = useState('media');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedAudioFile, setSelectedAudioFile] = useState<SelectedAudioFile | null>(null);
   const { theme, toggleTheme } = useTheme();
+
+  // Extraire le module de l'URL
+  const urlModule = location.pathname.split('/').pop() || 'media';
+  const [activeTab, setActiveTab] = useState(urlModule);
+  
+  // Synchroniser l'onglet actif avec l'URL
+  useEffect(() => {
+    if (urlModule) {
+      setActiveTab(urlModule);
+    }
+  }, [urlModule]);
+
+  // Fonction pour changer de module
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    navigate(`/project/${encodeURIComponent(projectName)}/${value}`);
+  };
 
   return (
     <div className="h-screen bg-[var(--app-bg)] text-foreground flex flex-col">
@@ -83,7 +100,7 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
       </div>
 
       {/* Main Content with Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="flex-1 flex flex-col">
         <div className="border-b border-[var(--app-border)] bg-[var(--app-panel)]">
           <TabsList className="h-12 bg-transparent px-4 gap-1 flex items-center">
             {/* Primary Tab - Always visible */}
@@ -136,7 +153,7 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
             <MediaModule 
               onFileSelect={(file) => {
                 setSelectedAudioFile(file);
-                setActiveTab('derush');
+                handleTabChange('derush');
               }}
             />
           </TabsContent>
@@ -147,7 +164,7 @@ export default function MainLayout({ projectName, onClose }: MainLayoutProps) {
                   audioFile={selectedAudioFile}
                   onClose={() => {
                     setSelectedAudioFile(null);
-                    setActiveTab('media');
+                    handleTabChange('media');
                   }}
                 />
               </TabsContent>
