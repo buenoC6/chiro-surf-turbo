@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81928bba-6a64-467a-ba06-2c7fdb702aec" name="Changes" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/chironium.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/animals/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/animals/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/autocomplete/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/autocomplete/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/axiosInstance.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/procedures/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/procedures/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/publicApiClient.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/vetApiClient.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/vetHooks.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/veterinarian/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/veterinarian/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/format.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/mockService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/mockedData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/AuthProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/ErrorProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/LoadingProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/ReactQueryProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/providers/TranslationProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/languageStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_accessibility.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_commons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_reset.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_typos.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/main.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="figma-make" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1761821677" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="figma-make" />
+                    <option name="lastUsedInstant" value="1761679936" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="2c5b0107-5f8e-4c70-ae22-a26edc0c7464" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="34hUi4uvz8stW2XjK7LhWFw8SRK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.26830.93" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81928bba-6a64-467a-ba06-2c7fdb702aec" name="Changes" comment="" />
+      <created>1761665420709</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761665420709</updated>
+      <workItem from="1761665421952" duration="10817000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix">
+      <option name="closed" value="true" />
+      <created>1761821668301</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761821668301</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+  </component>
+</project>
