@@ -1,0 +1,54 @@
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+}
+
+:root[data-theme='light'] {
+    /* Backgrounds */
+    --surface-100: #ffffff; /* page, canvas sonagramme */
+    --surface-200: #f4f4f5; /* panneaux, sidebars */
+    --surface-300: #e4e4e7; /* cartes/graphes secondaires */
+    --surface-400: #d4d4d8; /* hover panels, menus */
+    --surface-500: #c4c4c8; /* bordures, séparateurs */
+
+    /* Texte */
+    --text-primary: #111111;
+    --text-secondary: #444444;
+    --text-muted: #666666;
+
+    /* Statuts / alertes */
+    --success: #237804;
+    --warning: #ad6800;
+    --error: #cf1322;
+
+    /* Mesures spécifiques */
+    --freq-fi: #237804;
+    --freq-ft: #0050b3;
+    --freq-lb: #722ed1;
+    --selection: #d46b08;
+}
+
+:root[data-theme='dark'] {
+    /* Backgrounds */
+    --surface-100: #0d1117; /* page, canvas sonagramme */
+    --surface-200: #161b22; /* panneaux, sidebars */
+    --surface-300: #21262d; /* cartes/graphes secondaires */
+    --surface-400: #30363d; /* hover panels, menus */
+    --surface-500: #484f58; /* bordures, séparateurs */
+
+    /* Texte */
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+
+    /* Statuts / alertes */
+    --success: #3fb950;
+    --warning: #e5a200;
+    --error: #ff5c5c;
+
+    /* Mesures spécifiques */
+    --freq-fi: #3fb950;
+    --freq-ft: #1e90ff;
+    --freq-lb: #a17aff;
+    --selection: #ff9f1c;
+}

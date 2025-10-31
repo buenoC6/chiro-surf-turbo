@@ -1,0 +1,17 @@
+@import 'common.css';
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: var(--font-primary), sans-serif;
+    color: var(--text-primary);
+    background-color: var(--surface-100);
+}
+
+html body {
+    margin: 0;
+    padding: 0;
+}
